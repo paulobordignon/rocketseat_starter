@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Desafio 4</title>
+    </head>
+    <body>
+        <input type="text" name="nome">
+        <button>Buscar</button>
+        <div></div>
+        <script>
+            // EXERCÍCIO 1
+            function checaIdade(idade){
+                return new Promise(function(resolve, reject){
+                    if (idade>=18){
+                        setTimeout(resolve,2000);
+                    }else{
+                        setTimeout(reject,2000);
+                    }
+                });
+            }
+            checaIdade(16)
+                .then(function() {
+                    console.log("Maior que 18");
+                })
+                .catch(function() {
+                    console.log("Menor que 18");
+                });
+            // EXERCÍCIO 2 e 3
+            var bodyDiv = document.querySelector('body div');
+            var usuarioGit = document.querySelector('input');
+            var botao = document.querySelector('button');
+            var minhaPromise = function buscar(){
+                return new Promise(function(resolve, reject){
+                    var url = 'https://api.github.com/users/' + usuarioGit.value + '/repos';
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', url);
+                    xhr.send(null);
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState === 4){
+                            if(xhr.status===200){
+                                resolve(JSON.parse(xhr.responseText));
+                            }else{
+                                reject('Erro na requisição');
+                            }
+                        }
+                    }
+                });
+            }
+            botao.onclick = function procura(){
+                var ul = document.createElement('ul');
+                var li = document.createElement('li');
+                ul.appendChild(li);
+                var textoli = document.createTextNode('Carregando...');
+                li.appendChild(textoli);
+                bodyDiv.appendChild(ul);
+                minhaPromise()
+                    .then(function(response){
+                        ul.innerHTML='';
+                        for (var i=0; i<response.length; i++){
+                            var li = document.createElement('li');
+                            ul.appendChild(li);
+                            var textoli = document.createTextNode(response[i].name);
+                            li.appendChild(textoli);
+                        }
+                        bodyDiv.appendChild(ul);
+                    })
+                    .catch(function(error){
+                        console.warn(error);
+                        ul.innerHTML='';
+                        var li = document.createElement('li');
+                        ul.appendChild(li);
+                        var textoli = document.createTextNode('Usuário não existe');
+                        li.appendChild(textoli);
+                        bodyDiv.appendChild(ul);
+                    });
+                usuarioGit.value = '';
+            }    
+        </script>
+    </body>
+</html>

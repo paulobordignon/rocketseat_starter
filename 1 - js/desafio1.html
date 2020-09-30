@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title> Desafio 1 </title>
+    </head>
+    <body>
+        <script>
+            // EXERCÍCIO 1
+            var endereco = {
+                rua: "Rua dos pinheiros",
+                numero: 1293,
+                bairro: "Centro",
+                cidade: "São Paulo",
+                uf: "SP"
+            };
+            function retornaEndereco(){
+                console.log('O usuário mora em ' + endereco.cidade + ' / ' + endereco.uf +
+                ', no bairro '+ endereco.bairro + ', na rua ' + '"' + endereco.rua + '"' + " com nº " +
+                endereco.numero);
+            }
+            retornaEndereco();
+            // EXERCÍCIO 2
+            function pares(x, y){
+                var vetorPar = [];
+                var j = 0;
+                if(x > y){
+                    console.log("O primeiro número informado é maior que o segundo");
+                }else{
+                    for(var i = x; i <= y; i++){
+                        if(i%2==0){
+                            vetorPar[j] = i;
+                            j++;
+                        }
+                    }
+                    console.log("Número(s) par(es) encontrado(s): "+vetorPar);
+                }      
+            }
+            pares(10, 15);
+            // EXERCÍCIO 3
+            function temHabilidade(skills) {
+                var booleano;
+                var habilidadeJS = skills.indexOf('Javascript');
+                if(habilidadeJS === -1){
+                    booleano = false;
+                }else{
+                    booleano = true;
+                }
+                console.log(booleano);
+            }
+            var skills = ["Javascript", "ReactJS", "React Native"];
+            temHabilidade(skills);
+            // EXERCÍCIO 4
+            function experiencia(anos) {
+                if(anos >= 0 && anos <= 1){
+                    console.log("Iniciante");
+                }else if(anos > 1 && anos <= 3){
+                    console.log("Intermediário"); 
+                }else if(anos > 3 && anos <= 6){
+                    console.log("Avançado");
+                }else if (anos >= 7){
+                    console.log("Jedi Master");
+                }else{
+                    console.log("Valor Inválido");
+                }
+            }
+            var anosEstudo = 7;
+            experiencia(anosEstudo);
+            // EXERCÍCIO 5
+            var usuarios = [
+                {
+                    nome: "Diego",
+                    habilidades: ["Javascript", "ReactJS", "Redux"]
+                },
+                {
+                    nome: "Gabriel",
+                    habilidades: ["VueJS", "Ruby on Rails", "Elixir"]
+                }
+            ];
+            function deescreve(){
+                for(usuario of usuarios){
+                    console.log('O ' + usuario.nome + ' possui as habilidades: ' + usuario.habilidades.join(', '));
+                }
+            }
+            deescreve();
+        </script>
+    </body>
+</html>

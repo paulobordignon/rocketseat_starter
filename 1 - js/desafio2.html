@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Desafio 2</title>
+    </head>
+    <body>
+        <div>
+            <input type="button" value="Criar Quadrado">
+            <input type="text" name="nome">
+            <button onClick="adicionar()">Adicionar</button>
+        </div>
+        <script>
+            var bodyDiv = document.querySelector('div');
+            var botao = document.querySelector('input');
+            var i = 0;
+            botao.onclick = function criaQuadrado(){
+                var quadrado = document.createElement('div');
+                quadrado.setAttribute('id', 'quadrado'+i);
+                quadrado.setAttribute('class', 'quadrados');
+                quadrado.style.width = 100;
+                quadrado.style.height = 100;
+                quadrado.style.backgroundColor = '#f00';
+                bodyDiv.appendChild(quadrado);
+                i++;
+                // EXERCÍCIO 2
+                var quadradoCriado = document.querySelectorAll('.quadrados');
+                console.log(quadradoCriado);
+                for(j=0; j<i; j++){
+                    quadradoCriado[j].onmouseover = function alteraCor(){
+                        var newColor = getRandomColor();
+                        this.style.backgroundColor = newColor;
+                    }
+                }
+            }     
+            function getRandomColor() {
+                var letters = "0123456789ABCDEF";
+                var color = "#";
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+            // EXERCÍCIO 3
+            var nomes = ["Diego", "Gabriel", "Lucas"];
+            var ul = document.createElement('ul');
+            for (j=0; j < nomes.length; j++){
+                var li = document.createElement('li');
+                ul.appendChild(li);
+                var textoli = document.createTextNode(nomes[j]);
+                li.appendChild(textoli);
+            }
+            // EXERCÍCIO 4
+            function adicionar(){
+                var campoTexto = document.querySelector('input[name=nome]');
+                var li = document.createElement('li');
+                ul.appendChild(li);
+                var textoli = document.createTextNode(campoTexto.value);
+                li.appendChild(textoli);
+                campoTexto.value='';
+            }
+            bodyDiv.appendChild(ul);
+        </script>
+    </body>
+</html>
